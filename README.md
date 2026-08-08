@@ -19,7 +19,7 @@ CLI 不会索要抖音 Cookie。它只把用户提供的公开视频链接提交
 通过 skills.sh 安装：
 
 ~~~bash
-npx skills add kenny-shaw/exportdou-agent-tools --skill exportdou
+npx skills add wegoft/exportdou-agent-tools --skill exportdou
 ~~~
 
 通过 ClawHub 安装：
@@ -48,7 +48,7 @@ npx @skill-hub/cli install a8e6eca6/exportdou --agent codex
 - API 文档: https://exportdou.cn/developers
 - Skill 原文: https://exportdou.cn/SKILL.md
 - npm: https://www.npmjs.com/package/exportdou
-- skills.sh: https://www.skills.sh/kenny-shaw/exportdou-agent-tools/exportdou
+- skills.sh: https://www.skills.sh/wegoft/exportdou-agent-tools/exportdou
 - ClawHub: https://clawhub.ai/kenny-shaw/skills/exportdou
 - SkillHub.space: https://skillhub.space/skills/kennyshawchn/exportdou
 - SkillHub.club: https://www.skillhub.club/skills/a8e6eca6-exportdou

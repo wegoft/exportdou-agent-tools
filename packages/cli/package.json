@@ -38,10 +38,10 @@
   "homepage": "https://exportdou.cn/agents",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kenny-shaw/exportdou-agent-tools.git"
+    "url": "git+https://github.com/wegoft/exportdou-agent-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/kenny-shaw/exportdou-agent-tools/issues"
+    "url": "https://github.com/wegoft/exportdou-agent-tools/issues"
   },
   "engines": {
     "node": ">=18.17"
