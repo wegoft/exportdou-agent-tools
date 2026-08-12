@@ -15,20 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Check out the public website Skill mirror
-        uses: actions/checkout@v6
-        with:
-          repository: wegoft/exportdou
-          path: exportdou-site
       - uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
       - run: npm ci
+      - name: Download the deployed public Skill mirror
+        run: >-
+          curl --fail --silent --show-error --retry 5 --retry-delay 3
+          https://exportdou.cn/SKILL.md
+          --output "${RUNNER_TEMP}/exportdou-public-SKILL.md"
       - run: npm test
         env:
-          EXPORTDOU_PUBLIC_SKILL_PATH: ${{ github.workspace }}/exportdou-site/packages/web/public/SKILL.md
+          EXPORTDOU_PUBLIC_SKILL_PATH: ${{ runner.temp }}/exportdou-public-SKILL.md
       - name: Publish when this version is not already on npm
         shell: bash
         run: |
