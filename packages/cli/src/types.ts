@@ -10,7 +10,7 @@ export type ExportStatus =
   | 'deleting';
 
 export type Account = {
-  accountStatus: string;
+  accountStatus: 'active' | 'deleted' | 'suspended';
   createdAt: string;
   displayName: string | null;
   email: string | null;
@@ -27,6 +27,7 @@ export type Credits = {
 };
 
 export type PreviewComment = {
+  avatarUrl: string | null;
   authorName: string | null;
   createdAt: string | null;
   isAuthor: boolean;
@@ -36,12 +37,19 @@ export type PreviewComment = {
 };
 
 export type VideoPreview = {
+  authorAvatarUrl: string | null;
   authorName: string | null;
   cached: boolean;
   canonicalUrl: string;
   comments: PreviewComment[];
   coverUrl: string | null;
+  playUrls: string[];
+  publishedAt: string | null;
   reportedCommentCount: number | null;
+  reportedFavoriteCount: number | null;
+  reportedLikeCount: number | null;
+  reportedPlayCount: number | null;
+  reportedShareCount: number | null;
   title: string | null;
 };
 
@@ -64,17 +72,20 @@ export type ExportResult = {
 };
 
 export type ExportDetail = {
+  authorName: string | null;
   billedCredits: number;
   cancelRequested: boolean;
   canonicalUrl: string | null;
   completedAt: string | null;
   createdAt: string;
+  coverUrl: string | null;
   deliveredRows: number;
   error: { code: string; message: string } | null;
   format: 'csv' | 'xlsx';
   id: string;
   includeReplies: boolean;
   inputUrl: string;
+  publishedAt: string | null;
   progress: {
     deliveredRows: number;
     percentage: number;
@@ -84,10 +95,13 @@ export type ExportDetail = {
     targetRows: number;
   };
   releasedCredits: number;
+  replyRows: number;
   replyCoverage: string;
+  reportedCommentCount: number | null;
   reservedCredits: number;
   result: ExportResult | null;
   resultLimit: number;
+  rootRows: number;
   retryAfterSeconds: number | null;
   startedAt: string | null;
   status: ExportStatus;
@@ -97,15 +111,21 @@ export type ExportDetail = {
 
 export type ExportSummary = Pick<
   ExportDetail,
+  | 'authorName'
   | 'billedCredits'
   | 'cancelRequested'
+  | 'canonicalUrl'
   | 'completedAt'
+  | 'coverUrl'
   | 'createdAt'
   | 'deliveredRows'
   | 'format'
   | 'id'
   | 'includeReplies'
+  | 'replyRows'
+  | 'reportedCommentCount'
   | 'resultLimit'
+  | 'rootRows'
   | 'status'
   | 'title'
   | 'updatedAt'
@@ -117,6 +137,7 @@ export type ExportList = {
 };
 
 export type ResultPreviewComment = {
+  authorAvatarUrl: string | null;
   authorName: string | null;
   createdAt: string | null;
   id: string;
@@ -159,3 +180,11 @@ export type DeviceToken =
     interval: number;
     status: 'pending';
   };
+
+export type ResumeExportResponse = {
+  dispatchDelayed: boolean;
+  dispatchVersion: number;
+  id: string;
+  remainingCredits: number;
+  status: 'queued';
+};

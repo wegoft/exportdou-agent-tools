@@ -31,6 +31,7 @@ Options:
 - --limit N: total root plus reply row ceiling, 1 to 200,000.
 - --all: resolve the reported public count and use it only when within the row ceiling and available balance.
 - --replies: include second-level replies in the same total row limit.
+- --all and --replies cannot be combined because the reported count covers root comments, not every reply. Use an explicit --limit when replies are requested.
 - --format csv|xlsx: default CSV.
 - --wait: attach a human terminal until terminal status or timeout. Agents should omit it.
 - --timeout SECONDS: --wait timeout, default 600.
@@ -45,9 +46,12 @@ Immediate creation output contains taskId, status, reservedCredits, dispatchDela
 ~~~bash
 npx exportdou status "<task-id>" --json
 npx exportdou cancel "<task-id>" --json
+npx exportdou resume "<task-id>" --json
 ~~~
 
 Status includes public progress only: target and delivered rows, root and reply totals, percentage, result metadata, public error, billing totals, and retryAfterSeconds. It never exposes provider cursors, internal errors, or Queue position.
+
+Resume is valid only for an eligible partial task. It preserves the existing task and file, reuses saved checkpoints, and reserves only the remaining row allowance. After resuming, continue with status using the same task ID.
 
 ## Preview and download
 

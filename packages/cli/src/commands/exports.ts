@@ -11,6 +11,7 @@ import type {
   CreateExportResponse,
   Credits,
   ExportDetail,
+  ResumeExportResponse,
   ResultPreview,
   VideoPreview,
 } from '../types.js';
@@ -36,6 +37,9 @@ function idempotencyKey(): string {
 function statusReceipt(detail: ExportDetail): Record<string, unknown> {
   return {
     ...detail,
+    resume: detail.status === 'partial'
+      ? `exportdou resume ${detail.id} --json`
+      : null,
     next: terminalStatus(detail.status)
       ? detail.result
         ? `exportdou download ${detail.id}`
@@ -64,6 +68,9 @@ function printStatus(detail: ExportDetail, json: boolean): void {
   if (detail.result) {
     writeLine(`结果：${detail.result.rowCount.toLocaleString('zh-CN')} 条 ${detail.result.format.toUpperCase()}`);
     writeLine(`下一步：exportdou download ${detail.id}`);
+    if (detail.status === 'partial') {
+      writeLine(`从断点继续：exportdou resume ${detail.id}`);
+    }
   } else if (!terminalStatus(detail.status)) {
     writeLine(`下一步：exportdou status ${detail.id}`);
   }
@@ -83,6 +90,12 @@ async function resolveLimit(
       );
     }
     return limit;
+  }
+  if (options.includeReplies) {
+    throw new ExportDouError(
+      '--all 只能表示全部一级评论，不能与 --replies 同时使用。需要回复时请用 --limit 明确总行数。',
+      'conflicting_options',
+    );
   }
   if (options.limit != null) {
     throw new ExportDouError('不能同时使用 --all 和 --limit', 'conflicting_options');
@@ -360,4 +373,24 @@ export async function cancelExport(taskId: string, json: boolean): Promise<void>
   }>(`/exports/${taskId}/cancel`, { method: 'POST' });
   if (json) writeJson(result);
   else writeLine(result.cancelRequested ? `已请求取消：${taskId}` : `任务已经是 ${result.status}`);
+}
+
+export async function resumeExport(taskId: string, json: boolean): Promise<void> {
+  if (!taskId) throw new ExportDouError('请提供任务 ID', 'task_id_required');
+  const result = await new ApiClient().request<ResumeExportResponse>(
+    `/exports/${taskId}/resume`,
+    { method: 'POST' },
+  );
+  const receipt = {
+    ...result,
+    next: `exportdou status ${taskId} --json`,
+    taskId,
+  };
+  if (json) {
+    writeJson(receipt);
+    return;
+  }
+  writeLine(`任务已从断点重新排队：${taskId}`);
+  writeLine(`剩余预留：${result.remainingCredits.toLocaleString('zh-CN')} 积分`);
+  writeLine(`下一步：exportdou status ${taskId}`);
 }

@@ -32,9 +32,9 @@ Ask the user to approve the printed ExportDou browser URL. Never print, expose, 
 
 - Use the exact count when the user specifies one.
 - Use 100 for an explicitly requested sample, quick check, or exploratory analysis.
-- For “全部” or “all comments,” inspect first, then use --all. The CLI verifies the reported count, 200,000-row safety ceiling, and available credits.
+- For all root comments, inspect first, then use --all. The CLI verifies the reported root-comment count, 200,000-row safety ceiling, and available credits.
 - Ask for a count before a formal export when the user did not request a sample or all comments.
-- Add --replies only when the user wants comment replies. Replies and root comments share one total result limit and one credit count.
+- Add --replies only when the user wants comment replies. Replies and root comments share one total result limit and one credit count. Never combine --all with --replies because the reported count does not include every reply; use an explicit --limit instead.
 - Use CSV unless the user explicitly requests Excel/XLSX.
 
 Read references/commands.md when exact flags, output fields, or examples are needed.
@@ -66,6 +66,14 @@ npx exportdou status "<task-id>" --json
 ~~~
 
 If status is queued, processing, or rendering, preserve the same task ID and repeat the one-shot status command after retryAfterSeconds. Stop when status is completed, partial, failed, cancelled, or expired.
+
+`partial` means the current file is usable but collection stopped before the requested traversal finished. If the user still needs the remaining rows, resume the same task instead of creating a replacement:
+
+~~~bash
+npx exportdou resume "<task-id>" --json
+~~~
+
+Resume reuses saved checkpoints and reserves only the remaining row allowance. Continue status checks with the same task ID. If resume is not eligible, report the existing partial result and the returned reason.
 
 Do not use --wait by default. Use it only when a human explicitly wants the terminal attached.
 

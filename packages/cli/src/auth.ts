@@ -4,6 +4,7 @@ import { ApiClient, ExportDouError } from './api.js';
 import { clearApiKey, writeApiKey } from './config.js';
 import { progress, writeJson, writeLine } from './output.js';
 import type { Account, DeviceAuthorization, DeviceToken } from './types.js';
+import { packageVersion } from './version.js';
 
 function sleep(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -54,7 +55,7 @@ export async function login(options: {
       auth: false,
       body: {
         clientName: process.env.EXPORTDOU_CLIENT_NAME ?? 'ExportDou CLI',
-        clientVersion: process.env.npm_package_version ?? '1.0.0',
+        clientVersion: packageVersion(),
       },
       method: 'POST',
     },

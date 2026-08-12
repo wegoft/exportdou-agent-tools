@@ -1,4 +1,5 @@
 import { apiBaseUrl, readApiKey } from './config.js';
+import { packageVersion } from './version.js';
 
 export class ExportDouError extends Error {
   constructor(
@@ -26,9 +27,7 @@ type RequestOptions = {
 function endpoint(path: string): string {
   const base = apiBaseUrl();
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  return base.endsWith('/api/v1')
-    ? `${base}${normalizedPath}`
-    : `${base}/api/v1${normalizedPath}`;
+  return `${base}${normalizedPath}`;
 }
 
 function sleep(milliseconds: number): Promise<void> {
@@ -69,7 +68,7 @@ export class ApiClient {
     const headers: Record<string, string> = {
       Accept: 'application/json',
       'X-ExportDou-Client-Name': process.env.EXPORTDOU_CLIENT_NAME ?? 'exportdou-cli',
-      'X-ExportDou-Client-Version': process.env.npm_package_version ?? '1.0.0',
+      'X-ExportDou-Client-Version': packageVersion(),
       ...options.headers,
     };
     if (auth && apiKey) headers.Authorization = `Bearer ${apiKey}`;

@@ -6,14 +6,19 @@ type StoredConfig = {
   apiKey: string;
 };
 
+const DEFAULT_API_URL = 'https://api.exportdou.cn/v1';
+
 export function configPath(): string {
   return process.env.EXPORTDOU_CONFIG_PATH
     ?? join(homedir(), '.exportdou', 'config.json');
 }
 
 export function apiBaseUrl(): string {
-  return (process.env.EXPORTDOU_API_URL ?? 'https://exportdou.cn')
+  const configured = (process.env.EXPORTDOU_API_URL ?? DEFAULT_API_URL)
     .replace(/\/+$/u, '');
+  return /\/(?:api\/)?v1$/u.test(configured)
+    ? configured
+    : `${configured}/v1`;
 }
 
 export async function readApiKey(): Promise<string | null> {

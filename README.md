@@ -8,6 +8,7 @@ ExportDou（https://exportdou.cn）的官方 CLI 与 Agent Skill，用于稳定�
 npx exportdou login
 npx exportdou export "https://www.douyin.com/video/..." --limit 1000
 npx exportdou status "<task-id>" --json
+npx exportdou resume "<task-id>" --json
 npx exportdou preview "<task-id>" --limit 20 --json
 npx exportdou download "<task-id>" --output comments.csv
 ~~~

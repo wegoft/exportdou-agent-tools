@@ -7,6 +7,7 @@ npx exportdou login
 npx exportdou inspect "<Douyin link or share text>"
 npx exportdou export "<Douyin link>" --limit 1000 --replies
 npx exportdou status "<task-id>" --json
+npx exportdou resume "<task-id>" --json
 npx exportdou preview "<task-id>" --json
 npx exportdou download "<task-id>" --output comments.csv
 ~~~
