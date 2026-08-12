@@ -114,5 +114,5 @@ Read references/errors.md when a command fails.
 
 - Website: https://exportdou.cn
 - API docs: https://exportdou.cn/developers
-- CLI guide: https://exportdou.cn/agents
+- CLI guide: https://exportdou.cn/developers#agent
 - Pricing: https://exportdou.cn/pricing

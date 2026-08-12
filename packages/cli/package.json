@@ -35,7 +35,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "homepage": "https://exportdou.cn/agents",
+  "homepage": "https://exportdou.cn/developers#agent",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wegoft/exportdou-agent-tools.git"

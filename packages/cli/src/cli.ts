@@ -54,7 +54,7 @@ function help(): void {
   EXPORTDOU_API_URL      API 地址（默认 https://exportdou.cn）
   EXPORTDOU_CONFIG_PATH  自定义本机配置路径
 
-网站：https://exportdou.cn/agents
+网站：https://exportdou.cn/developers#agent
 API： https://exportdou.cn/developers`);
 }
 
