@@ -43,6 +43,8 @@ npx @skill-hub/cli install a8e6eca6/exportdou --agent codex
 
 腾讯 SkillHub 条目：[抖音评论导出 · 抖评岛](https://skillhub.cn/skills/user_661dc82b/exportdou)。该条目需要在 SkillHub 后台单独更新，推送 GitHub 或发布 ClawHub 不代表它已同步。
 
+Qoder 已提交「抖音评论导出 · 抖评岛」，当前待审核；MiniMax 公共市场已能搜到 `exportdou` 和中文简介。安装包、展示信息和其他国内渠道进度见[分发记录](docs/china-agent-channels.md)。
+
 2026-09-18 已发布中文版 Skill `1.0.3`：ClawHub、腾讯 SkillHub 下载包和官网 `/SKILL.md` 均已核对为本仓库版本。ClawHub 安全检查通过；腾讯 SkillHub 的安全扫描状态以平台页面为准。CLI 继续使用已发布的 `exportdou@1.0.3`，此次未重复发布 npm 包。
 
 如果 ClawHub 工作流报 `Invalid publish output: 'pending-publication'`，先查看平台版本和审核状态。上游工作流尚未识别这一“等待发布审核”的状态，不能据此判断上传失败。审核通过且内容核对一致后，重跑该工作流复核，不要重复提交或盲目增加版本号。
