@@ -1,16 +1,16 @@
 # ExportDou Agent Tools
 
-ExportDou（https://exportdou.cn）的官方 CLI 与 Agent Skill，用于稳定、可恢复地导出公开抖音视频评论。
+抖评岛（ExportDou，https://exportdou.cn）的官方 CLI 与 Agent Skill。粘贴抖音视频链接，导出评论和回复为 CSV 或 Excel，也可先预览少量评论再分析用户反馈。
 
 ## CLI
 
 ~~~bash
-npx exportdou login
-npx exportdou export "https://www.douyin.com/video/..." --limit 1000
-npx exportdou status "<task-id>" --json
-npx exportdou resume "<task-id>" --json
-npx exportdou preview "<task-id>" --limit 20 --json
-npx exportdou download "<task-id>" --output comments.csv
+npx exportdou@1.0.3 login
+npx exportdou@1.0.3 export "https://www.douyin.com/video/..." --limit 1000
+npx exportdou@1.0.3 status "<task-id>" --json
+npx exportdou@1.0.3 resume "<task-id>" --json
+npx exportdou@1.0.3 preview "<task-id>" --limit 20 --json
+npx exportdou@1.0.3 download "<task-id>" --output comments.csv
 ~~~
 
 CLI 不会索要抖音 Cookie。它只把用户提供的公开视频链接提交给 ExportDou，立即返回任务 ID，并让任务在云端继续运行。
@@ -26,7 +26,7 @@ npx skills add wegoft/exportdou-agent-tools --skill exportdou
 通过 ClawHub 安装：
 
 ~~~bash
-clawhub install exportdou
+clawhub install @kenny-shaw/exportdou
 ~~~
 
 通过 SkillHub.space 安装：
@@ -41,7 +41,11 @@ SkillHub.club 完成平台安全审核后，可安装到 Codex：
 npx @skill-hub/cli install a8e6eca6/exportdou --agent codex
 ~~~
 
-该 Skill 会指导兼容的 Agent：每个导出任务只提交一次、保存任务 ID、按建议间隔查询状态、只读取少量 JSON 评论用于分析，并在需要时下载完整 CSV/XLSX 文件。
+腾讯 SkillHub 条目：[抖音评论导出 · 抖评岛](https://skillhub.cn/skills/user_661dc82b/exportdou)。该条目需要在 SkillHub 后台单独更新，推送 GitHub 或发布 ClawHub 不代表它已同步。
+
+Skill 的中文名称是「抖音评论导出 · 抖评岛」，安装标识仍为 `exportdou`。正文为中文，Agent 按用户的语言回复。需要抖评岛账号和可用积分，默认 API 为 `https://api.exportdou.cn/v1`。
+
+`skills/exportdou/SKILL.md` 包含完整操作说明；根目录副本和官网 `/SKILL.md` 与它保持一致。原来分散在两个参考文件里的参数和异常处理已合并到正文，单独下载 `SKILL.md` 也能使用。`agents/openai.yaml` 只负责兼容客户端的名称、短简介和示例提问，不替代 SkillHub 后台的展示资料。
 
 ## 相关链接
 
