@@ -2,6 +2,21 @@
 
 核对日期：2026-09-18。
 
+## WorkBuddy 原生入口：已提交审核
+
+- [发布管理](https://open.workbuddy.cn/skill/all)，发布账号显示「肖坤 / 个人 · 超管」。
+- 显示名：**抖音评论导出 · 抖评岛**；版本：`1.0.3`；技能 ID：`os_10be4ae75aca8cd1`。
+- 市场展示分类：**数据分析**；服务类目：**工具 - 办公**；图标使用官网现有 512×512 PNG。
+- 提交后回执显示「已提交审核，预计 7 个工作日内出结果」，返回资产列表确认该条目为 **审核中**。这是提交回执，不是审核通过或客户端实际导出验收。
+- 此前已更新的[腾讯 SkillHub 条目](https://skillhub.cn/skills/user_661dc82b/exportdou)与这里独立，不能把 SkillHub 发布当作 WorkBuddy 原生投稿完成。
+- 上传包：`dist/workbuddy/exportdou-workbuddy-1.0.3.zip`；SHA-256：`ef8f946acc4f1d38b9584df4d6228bc7790dcf9466094eb600e708450502ce80`。
+
+用 `npm run build:skill:workbuddy` 重建上传包。脚本将 `distribution/workbuddy.json` 中的中文、英文展示字段写入生成包，标准 `skills/exportdou/SKILL.md` 不增加平台专用字段，执行正文保持完全一致。ZIP 根目录只包含 `SKILL.md`。CLI 继续使用已发布的 `exportdou@1.0.3`，默认 API 仍为 `https://api.exportdou.cn/v1`。
+
+核验已通过：生成脚本、标准 Skill 副本同步、生成正文与标准正文逐字一致、ZIP 内容和差异格式检查。此变更未修改运行时逻辑，没有重复发布 npm 包。后续更新使用现有技能 ID，避免新建同名条目。
+
+字段要求见 [WorkBuddy 官方文档](https://open.workbuddy.cn/docs/skill)。
+
 ## Qoder 投稿回执
 
 - [我的发布](https://qoder.cn/account/apphub-publications)，发布账号 `xiaokunonly`。

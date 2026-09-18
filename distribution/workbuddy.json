@@ -1,0 +1,7 @@
+{
+  "display_name": "抖音评论导出 · 抖评岛",
+  "display_name_en": "ExportDou · Douyin Comment Export",
+  "description_zh": "粘贴抖音视频链接，导出公开评论和楼中楼回复，保存为 CSV 或 Excel。也可先预览少量评论，分析用户反馈、产品问题和选题。中断后可继续原任务。需要 Node.js、抖评岛（ExportDou）账号和可用积分；回复和 Excel 功能以账号套餐权限为准。",
+  "description_en": "Export public Douyin comments and replies to CSV or Excel. Preview a small sample for feedback analysis and resume interrupted exports. Requires Node.js, an ExportDou account and available credits. Replies and Excel depend on plan permissions.",
+  "author": "Kenny Shaw"
+}

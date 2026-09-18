@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspace exportdou",
+    "build:skill:workbuddy": "node scripts/build-workbuddy-skill.mjs",
     "check:registry": "node scripts/check-public-registry.mjs",
     "check:skill-sync": "bash scripts/check-skill-sync.sh",
     "cli": "node packages/cli/dist/cli.js",
